@@ -2,160 +2,206 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Basic Carousel with Flags</title>
   <style>
-    * {
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Basic navigation bar styles */
+    nav {
+      width: 100%;
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      box-sizing: border-box;
+    }
+    nav ul {
+      list-style-type: none;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
-
-    body, html {
-      height: 100%;
-    }
-
-    .container {
       display: flex;
-      height: 100vh;
+      gap: 20px;
     }
-
-    .left {
-      flex: 1;
-      background-size: 100%;
-      background-position: 0%;
-      background-position-x: left;
-      background-color: #b4aeb1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+    nav ul li {
+      /* inline by default */
     }
-
-    .overlay {
-      background: url('https://pgc.edu/wp-content/uploads/2023/07/PGC-Admissions-SPREE-2023.png') no-repeat center center;
-      position: relative;
-      background-position: 8%;
-      flex-wrap: wrap;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .right {
-      flex: 1;
-      background-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-    }
-
-    .form-box {
-      width: 100%;
-      max-width: 400px;
-    }
-
-    h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-
-    form label {
-      display: block;
-      margin-bottom: 6px;
-      margin-top: 12px;
-      font-weight: 500;
-    }
-
-    form input[type="text"],
-    form input[type="email"],
-    form input[type="password"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .checkbox {
-      margin-top: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-    }
-
-    .checkbox a {
-      text-decoration: none;
-      color: #b12b8f;
-    }
-
-    button {
-      margin-top: 20px;
-      width: 50%;
-      padding: 12px;
-      background: linear-gradient(to right, #b12b8f, #e04b93);
+    nav ul li a {
       color: white;
-      border: none;
-      border-radius: 25px;
+      text-decoration: none;
       font-size: 16px;
+      padding: 6px 12px;
+      display: block;
+      transition: background-color 0.3s ease;
+      border-radius: 4px;
+    }
+    nav ul li a:hover {
+      background-color: #555;
+    }
+
+    /* Carousel container styles */
+    .carousel {
+      position: relative;
+      width: 600px;
+      height: 350px;
+      overflow: hidden;
+      background: #eee;
+      margin-top: 20px;
+    }
+    .carousel-inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+    .carousel-item {
+      min-width: 100%;
+      height: 100%;
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: white;
+    }
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    button {
+      background: #000;
+      border: none;
+      color: white;
+      font-size: 24px;
+      padding: 0 12px;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    button:hover {
+      opacity: 1;
+    }
+    .dots {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+    }
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      background-color: #888;
+      border-radius: 50%;
       cursor: pointer;
     }
-
-    .a {
-      margin-left: 50px;
-    }
-
-    #lll {
-      display: inline-block;
-      margin-top: 20px;
-      color: #b12b8f;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    #lll:hover {
-      text-decoration: underline;
+    .dot.active {
+      background-color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="left">
-      <div class="overlay"></div>
-    </div>
-    <div class="right">
-      <div class="form-box">
-        <h2>Sign Up</h2>
-        <form>
-          <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" placeholder="kashif malik student of css" />
+  <nav role="navigation" aria-label="Primary Navigation">
+    <ul>
+      <li><a href="#home" tabindex="0">Home</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+      <li><a href="#privacy" tabindex="0">Privacy</a></li>
+      <li><a href="#address" tabindex="0">Address</a></li>
+    </ul>
+  </nav>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="kashifmalik@example.com" />
-
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="kashifmalik" />
-
-          <label for="password">Password</label>
-          <input type="password" id="password" />
-
-          <label for="repeat-password">Repeat Password</label>
-          <input type="password" id="repeat-password" />
-
-          <div class="checkbox">
-            <input type="checkbox" id="terms" />
-            <label for="terms">I agree to the <a href="#">Terms of User</a></label>
-          </div>
-
-          <button type="submit">Sign Up</button>
-          <a href="#" id="lll">Sign in →</a>
-        </form>
+  <div class="carousel" aria-label="Image Carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" alt="Flag of Pakistan" />
+      </div>
+      <div class="carousel-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg" alt="Flag of Palestine" />
+      </div>
+      <div class="carousel-item">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="Flag of England" />
       </div>
     </div>
+    <div class="controls">
+      <button class="prev" aria-label="Previous slide">&#10094;</button>
+      <button class="next" aria-label="Next slide">&#10095;</button>
+    </div>
+    <div class="dots" role="tablist" aria-label="Carousel navigation dots">
+      <span class="dot active" role="tab" tabindex="0" aria-selected="true"></span>
+      <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
+      <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
+    </div>
   </div>
+
+  <script>
+    (function(){
+      const carouselInner = document.querySelector('.carousel-inner');
+      const items = document.querySelectorAll('.carousel-item');
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      const dots = document.querySelectorAll('.dot');
+      const totalItems = items.length;
+      let currentIndex = 0;
+
+      function updateCarousel(){
+        carouselInner.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+        dots.forEach((dot, i) => {
+          if(i === currentIndex){
+            dot.classList.add('active');
+            dot.setAttribute('aria-selected', 'true');
+            dot.setAttribute('tabindex', '0');
+          } else {
+            dot.classList.remove('active');
+            dot.setAttribute('aria-selected', 'false');
+            dot.setAttribute('tabindex', '-1');
+          }
+        });
+      }
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? totalItems - 1 : currentIndex - 1;
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === totalItems - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          currentIndex = i;
+          updateCarousel();
+        });
+      });
+
+      let autoSlide = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      }, 5000);
+
+      document.querySelector('.carousel').addEventListener('mouseenter', () => {
+        clearInterval(autoSlide);
+      });
+      document.querySelector('.carousel').addEventListener('mouseleave', () => {
+        autoSlide = setInterval(() => {
+          currentIndex = (currentIndex + 1) % totalItems;
+          updateCarousel();
+        }, 5000);
+      });
+    })();
+  </script>
 </body>
 </html>
